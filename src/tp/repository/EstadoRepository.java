@@ -6,4 +6,5 @@ public interface EstadoRepository {
 
 	void insertEstado(Estado e);
 	
+	
 }

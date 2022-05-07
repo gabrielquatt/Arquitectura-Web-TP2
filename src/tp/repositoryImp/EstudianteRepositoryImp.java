@@ -62,7 +62,11 @@ public class EstudianteRepositoryImp implements EstudianteRepository{
 		this.em = emf.createEntityManager();	
 		em.getTransaction().begin();		
 		@SuppressWarnings("unchecked")
+<<<<<<< HEAD
 		List<Estudiante> list = em.createQuery("SELECT e FROM Estudiante e WHERE e.genero = :genero", Estudiante.class).setParameter("genero", genero).getResultList();
+=======
+		List<Estudiante> list = em.createQuery("SELECT e FROM Estudiante e WHERE e.genero = ?1").setParameter(1, genero).getResultList();	
+>>>>>>> 42c704f9166b0c7f12aa2c729521320abc9b5f24
 		em.close();
 		emf.close();
 		return list;
