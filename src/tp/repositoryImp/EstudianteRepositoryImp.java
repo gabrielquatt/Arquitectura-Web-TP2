@@ -1,8 +1,11 @@
 package tp.repositoryImp;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 import tp.clases.tablas.Estudiante;
 import tp.repository.EstudianteRepository;
@@ -28,6 +31,35 @@ public class EstudianteRepositoryImp implements EstudianteRepository{
 		em.getTransaction().commit();
 		em.close();
 		emf.close();
+	}
+
+	@Override
+	public List<Estudiante> getEstudiantes() {	
+		this.emf  = Persistence.createEntityManagerFactory("Example");
+		this.em = emf.createEntityManager();	
+		em.getTransaction().begin();		
+		@SuppressWarnings("unchecked")
+		List<Estudiante> list = em.createQuery("SELECT e FROM Estudiante e ORDER BY e.num_Libreta DESC").getResultList();	
+		em.close();
+		emf.close();
+		return list;
+	}
+
+	@Override
+	public Estudiante getEstudianteById(int id) {
+		this.emf  = Persistence.createEntityManagerFactory("Example");
+		this.em = emf.createEntityManager();	
+		em.getTransaction().begin();			
+		Estudiante e =	em.find(Estudiante.class, id);;
+		em.close();
+		emf.close();	
+		return e;
+	}
+
+	@Override
+	public List<Estudiante> getEstudiantesByGenero(String genero) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

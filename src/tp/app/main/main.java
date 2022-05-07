@@ -1,24 +1,18 @@
 package tp.app.main;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-//
-//import org.apache.commons.csv.CSVFormat;
-//import org.apache.commons.csv.CSVParser;
-//import org.apache.commons.csv.CSVRecord;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
+import antlr.collections.List;
 import tp.clases.tablas.Carrera;
 import tp.clases.tablas.Estado;
 import tp.clases.tablas.Estudiante;
@@ -30,18 +24,27 @@ public class main {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
 		
-		//CONSULTA
-
-		loadCSV();
-		
-	}
-
-	
-	public static void loadCSV() throws FileNotFoundException, IOException, ParseException {
-		
 		EstudianteRepositoryImp er = new EstudianteRepositoryImp();
 		CarreraRepositoryImp cr = new CarreraRepositoryImp();
 		EstadoRepositoryImp estr = new EstadoRepositoryImp();
+		
+		//loadCSV(er,cr,estr);
+		
+		//"Lista todos los estudiantes Ordenados por Numero De Libreta Decendentemente"
+		for(Estudiante e :er.getEstudiantes()) {
+		      System.out.println(e);
+		    }
+		System.out.println();
+		System.out.println();
+		
+		//Retorna los estudiantes por un ID
+		Estudiante e2 = er.getEstudianteById(11105749);
+		System.out.println(e2);
+	
+	}
+
+	
+	public static void loadCSV(EstudianteRepositoryImp er, CarreraRepositoryImp cr, EstadoRepositoryImp estr) throws FileNotFoundException, IOException, ParseException {
 		
 		ArrayList<Estudiante> list_e = new ArrayList<>();
 		ArrayList<Carrera> list_c = new ArrayList<>();
