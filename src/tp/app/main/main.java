@@ -40,6 +40,19 @@ public class main {
 		//Retorna los estudiantes por un ID
 		Estudiante e2 = er.getEstudianteById(11105749);
 		System.out.println(e2);
+		
+		System.out.println();
+		System.out.println();
+		
+		//"Lista todos los estudiantes filtrados por genero"
+		for(Estudiante e :er.getEstudiantesByGenero("Male")) {
+			System.out.println(e);
+		}
+		
+		//"Lista todos los estudiantes filtrados por genero"
+		for(Carrera c :cr.getCarreras()) {
+			System.out.println(c);
+		}
 	
 	}
 
