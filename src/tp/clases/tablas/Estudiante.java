@@ -26,15 +26,15 @@ public class Estudiante {
 	@Column (name = "genere")
 	private String genero;
 	
-	@ManyToOne //FK
-	private Ciudad residencia;
+	@Column
+	private String residencia;
 
 	public Estudiante() {
 		super();
 	}
 	
 	public Estudiante(int num_Libreta, int num_doc, String nombres, String apellido, int edad, String genero,
-			Ciudad residencia) {
+			String residencia) {
 		super();
 		this.num_Libreta = num_Libreta;
 		this.num_doc = num_doc;
@@ -93,11 +93,11 @@ public class Estudiante {
 		this.genero = genero;
 	}
 
-	public Ciudad getResidencia() {
+	public String getResidencia() {
 		return residencia;
 	}
 
-	public void setResidencia(Ciudad residencia) {
+	public void setResidencia(String residencia) {
 		this.residencia = residencia;
 	}
 

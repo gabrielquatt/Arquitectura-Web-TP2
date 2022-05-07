@@ -1,43 +1,54 @@
 package tp.clases.tablas;
-
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Estado {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
-
-	@ManyToOne
-	private Carrera carrera;
+	@EmbeddedId
+	private EstudianteCarreraPK id; 
 	
 	@ManyToOne
-	private Estudiante estudiante;
+	private Carrera carrera;//FK
+	
+	@ManyToOne 
+	private Estudiante estudiante;//FK
 
 	@Column
-	private int anios;
+	private LocalDate anioIngreso;
 	
 	@Column
-	private boolean recibido;
+	private LocalDate anioEgreso;
 	
 	public Estado() {
 		super();
 	}
-
-	public Estado(Carrera carrera, Estudiante estudiante, int anios, boolean recibido) {
-		super();
-		this.carrera = carrera;
-		this.estudiante = estudiante;
-		this.anios = anios;
-		this.recibido = recibido;
-	}
 	
+	public Estado( Carrera c, Estudiante e, LocalDate anios) {
+		this.id = new EstudianteCarreraPK(c.getId(), e.getNum_Libreta());
+		//this.pk = new EstudianteCarreraPK(e, c);
+		this.carrera = c;
+		this.estudiante = e;
+		this.anioIngreso = anios;
+		this.anioEgreso = null;
+	}
+
+	
+
+	public Estado( Carrera c, Estudiante e, LocalDate anios, LocalDate anioEgreso) {
+		this.id = new EstudianteCarreraPK(c.getId(), e.getNum_Libreta());
+		//this.pk = new EstudianteCarreraPK(e, c);
+		this.carrera = c;
+		this.estudiante = e;
+		this.anioIngreso = anios;
+		this.anioEgreso = anioEgreso;
+	}
+
 	public Carrera getCarrera() {
 		return carrera;
 	}
@@ -54,26 +65,26 @@ public class Estado {
 		this.estudiante = estudiante;
 	}
 
-	public int getAnios() {
-		return anios;
+	public LocalDate getAnioIngreso() {
+		return anioIngreso;
 	}
 
-	public void setAnios(int anios) {
-		this.anios = anios;
+	public void setAnios(LocalDate anios) {
+		this.anioIngreso = anios;
 	}
 
-	public boolean isRecibido() {
-		return recibido;
+	public LocalDate anioEgreso() {
+		return anioEgreso;
 	}
 
-	public void setRecibido(boolean recibido) {
-		this.recibido = recibido;
+	public void setanioEgreso(LocalDate recibido) {
+		this.anioEgreso = recibido;
 	}
 	
 	@Override
 	public String toString() {
-		return "Estado [carrera=" + carrera + ", estudiante=" + estudiante + ", anios=" + anios + ", recibido="
-				+ recibido + "]";
+		return "Estado [carrera=" + carrera + ", estudiante=" + estudiante + ", año de ingreso=" + anioIngreso + ", anio que se recibio="
+				+ anioEgreso + "]";
 	}
 	
 	
