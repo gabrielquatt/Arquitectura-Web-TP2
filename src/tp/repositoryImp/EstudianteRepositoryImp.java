@@ -58,8 +58,14 @@ public class EstudianteRepositoryImp implements EstudianteRepository{
 
 	@Override
 	public List<Estudiante> getEstudiantesByGenero(String genero) {
-		// TODO Auto-generated method stub
-		return null;
+		this.emf  = Persistence.createEntityManagerFactory("Example");
+		this.em = emf.createEntityManager();	
+		em.getTransaction().begin();		
+		@SuppressWarnings("unchecked")
+		List<Estudiante> list = em.createQuery("SELECT e FROM Estudiante e WHERE e.genero = :genero", Estudiante.class).setParameter("genero", genero).getResultList();
+		em.close();
+		emf.close();
+		return list;
 	}
 
 }

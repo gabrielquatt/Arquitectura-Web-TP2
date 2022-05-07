@@ -28,18 +28,22 @@ public class main {
 		CarreraRepositoryImp cr = new CarreraRepositoryImp();
 		EstadoRepositoryImp estr = new EstadoRepositoryImp();
 		
-		//loadCSV(er,cr,estr);
+		// loadCSV(er,cr,estr);
 		
-		//"Lista todos los estudiantes Ordenados por Numero De Libreta Decendentemente"
-		for(Estudiante e :er.getEstudiantes()) {
-		      System.out.println(e);
-		    }
-		System.out.println();
-		System.out.println();
+		// //"Lista todos los estudiantes Ordenados por Numero De Libreta Decendentemente"
+		// for(Estudiante e :er.getEstudiantes()) {
+		//       System.out.println(e);
+		//     }
+		// System.out.println();
+		// System.out.println();
 		
-		//Retorna los estudiantes por un ID
-		Estudiante e2 = er.getEstudianteById(11105749);
-		System.out.println(e2);
+		// //Retorna los estudiantes por un ID
+		// Estudiante e2 = er.getEstudianteById(11105749);
+		// System.out.println(e2);
+
+		for(Carrera c :cr.getCarrerasByInscriptos()) {
+			System.out.println(c);
+		}
 	
 	}
 

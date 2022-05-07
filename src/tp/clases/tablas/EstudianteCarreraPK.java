@@ -7,17 +7,17 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class EstudianteCarreraPK implements Serializable{
-
-	@Column
-	private int e;
-
+	
 	@Column
 	private int c;
+	@Column
+	private int e;
 	
 	public EstudianteCarreraPK(int i, int j) {
 		super();
-		this.e = i;
-		this.c = j;
+		// INTERCAMBIADO ASIGNACIONES PORQUE SE ESTABAN ASOCIANDO CRUZADOS CON LOS id's DE ESTUDIANTE Y CARRERA
+		this.c = i;
+		this.e = j;
 	}
 
 	public int getE() {
