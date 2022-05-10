@@ -1,3 +1,4 @@
+// allá
 package tp.repositoryImp;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -31,14 +32,11 @@ public class CarreraRepositoryImp implements CarreraRepository{
 	}
 
 	@Override
-<<<<<<< HEAD
-	public List<Carrera> getCarrerasByInscriptos() {
-=======
 	public List<Carrera> getCarreras() {
 		this.emf  = Persistence.createEntityManagerFactory("Example");
 		this.em = emf.createEntityManager();	
 		em.getTransaction().begin();		
-		@SuppressWarnings("unchecked");
+		@SuppressWarnings("unchecked")
 		List<Carrera> list = em.createQuery("SELECT c FROM Carrera c JOIN Estado e ON c.id = e.carrera GROUP BY c.id ORDER BY COUNT(*)").getResultList();	
 		em.close();
 		return list;

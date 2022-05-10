@@ -13,4 +13,7 @@ public interface EstudianteRepository {
 	Estudiante getEstudianteById(int id);
 	
 	List<Estudiante> getEstudiantesByGenero(String genero);
+
+	List<Estudiante> getEstudiantesByCiudad(String ciudad, int idCarrera);
+
 }

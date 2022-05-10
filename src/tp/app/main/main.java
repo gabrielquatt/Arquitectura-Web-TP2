@@ -37,13 +37,6 @@ public class main {
 		// System.out.println();
 		// System.out.println();
 		
-<<<<<<< HEAD
-		// //Retorna los estudiantes por un ID
-		// Estudiante e2 = er.getEstudianteById(11105749);
-		// System.out.println(e2);
-
-		for(Carrera c :cr.getCarrerasByInscriptos()) {
-=======
 		//Retorna los estudiantes por un ID
 		Estudiante e2 = er.getEstudianteById(11105749);
 		System.out.println(e2);
@@ -52,14 +45,17 @@ public class main {
 		System.out.println();
 		
 		//"Lista todos los estudiantes filtrados por genero"
-		for(Estudiante e :er.getEstudiantesByGenero("Male")) {
-			System.out.println(e);
-		}
+		// for(Estudiante e :er.getEstudiantesByGenero("Male")) {
+		// 	System.out.println(e);
+		// }
 		
 		//"Lista todos los estudiantes filtrados por genero"
-		for(Carrera c :cr.getCarreras()) {
->>>>>>> 42c704f9166b0c7f12aa2c729521320abc9b5f24
-			System.out.println(c);
+		// for(Carrera c :cr.getCarreras()) {
+		// 	System.out.println(c);
+		// }
+
+		for(Estudiante e :er.getEstudiantesByCiudad("Ouyang", 15)){
+			System.out.println(e);
 		}
 	
 	}

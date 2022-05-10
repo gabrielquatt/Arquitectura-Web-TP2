@@ -7,6 +7,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import org.hibernate.Query;
+
 import tp.clases.tablas.Estudiante;
 import tp.repository.EstudianteRepository;
 
@@ -62,14 +64,34 @@ public class EstudianteRepositoryImp implements EstudianteRepository{
 		this.em = emf.createEntityManager();	
 		em.getTransaction().begin();		
 		@SuppressWarnings("unchecked")
-<<<<<<< HEAD
-		List<Estudiante> list = em.createQuery("SELECT e FROM Estudiante e WHERE e.genero = :genero", Estudiante.class).setParameter("genero", genero).getResultList();
-=======
 		List<Estudiante> list = em.createQuery("SELECT e FROM Estudiante e WHERE e.genero = ?1").setParameter(1, genero).getResultList();	
->>>>>>> 42c704f9166b0c7f12aa2c729521320abc9b5f24
 		em.close();
 		emf.close();
 		return list;
 	}
+
+	@Override
+	public List<Estudiante> getEstudiantesByCiudad(String ciudad, int idCarrera) {
+		this.emf  = Persistence.createEntityManagerFactory("Example");
+		this.em = emf.createEntityManager();	
+		em.getTransaction().begin();
+		javax.persistence.Query query = em.createQuery("SELECT e FROM Estudiante e WHERE e.residencia = ?1 AND EXISTS ( SELECT c.id FROM Carrera c WHERE e.num_Libreta = c.num_Libreta AND c.id = ?2)");
+		query.setParameter(1, ciudad);
+		query.setParameter(2, idCarrera);		
+		@SuppressWarnings("unchecked")
+		List<Estudiante> list = query.getResultList();
+		em.close();
+		emf.close();
+		return list;
+	}
+// SELECT *
+// FROM estudiante e
+// TODO: JOIN con tabla Estado
+// WHERE e.id_ciudad = idCiudad 
+// AND EXISTS (
+// SELECT c.id
+// FROM carrera c
+// WHERE e.num_Libreta = c.num_Libreta AND c.id = idCarrera
+// )
 
 }
