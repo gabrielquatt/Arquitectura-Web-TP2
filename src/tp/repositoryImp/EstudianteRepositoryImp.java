@@ -5,9 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import javax.persistence.Query;
 
-import org.hibernate.Query;
 
 import tp.clases.tablas.Estudiante;
 import tp.repository.EstudianteRepository;
@@ -75,23 +74,14 @@ public class EstudianteRepositoryImp implements EstudianteRepository{
 		this.emf  = Persistence.createEntityManagerFactory("Example");
 		this.em = emf.createEntityManager();	
 		em.getTransaction().begin();
-		javax.persistence.Query query = em.createQuery("SELECT e FROM Estudiante e WHERE e.residencia = ?1 AND EXISTS ( SELECT c.id FROM Carrera c WHERE e.num_Libreta = c.num_Libreta AND c.id = ?2)");
+		Query query = em.createQuery("SELECT e.name FROM Estudiante e WHERE e.residencia LIKE ?1 AND e.num_Libreta IN (SELECT es.e FROM Estado es WHERE (es.c = ?2))");
 		query.setParameter(1, ciudad);
 		query.setParameter(2, idCarrera);		
 		@SuppressWarnings("unchecked")
 		List<Estudiante> list = query.getResultList();
 		em.close();
 		emf.close();
-		return list;
+		return list;	
 	}
-// SELECT *
-// FROM estudiante e
-// TODO: JOIN con tabla Estado
-// WHERE e.id_ciudad = idCiudad 
-// AND EXISTS (
-// SELECT c.id
-// FROM carrera c
-// WHERE e.num_Libreta = c.num_Libreta AND c.id = idCarrera
-// )
 
 }

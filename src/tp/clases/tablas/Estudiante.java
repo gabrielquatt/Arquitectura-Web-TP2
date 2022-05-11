@@ -13,8 +13,8 @@ public class Estudiante {
 	@Column (nullable = false)
 	private int num_doc;
 	
-	@Column (name = "name")
-	private String nombres;
+	@Column 
+	private String name;
 
 	@Column
 	private String apellido;
@@ -37,7 +37,7 @@ public class Estudiante {
 		super();
 		this.num_Libreta = num_Libreta;
 		this.num_doc = num_doc;
-		this.nombres = nombres;
+		this.name = nombres;
 		this.apellido = apellido;
 		this.edad = edad;
 		this.genero = genero;
@@ -61,11 +61,11 @@ public class Estudiante {
 	}
 
 	public String getNombres() {
-		return nombres;
+		return name;
 	}
 
 	public void setNombres(String nombres) {
-		this.nombres = nombres;
+		this.name = nombres;
 	}
 
 	public String getApellido() {
@@ -102,7 +102,7 @@ public class Estudiante {
 
 	@Override
 	public String toString() {
-		return "Estudiante [num_Libreta=" + num_Libreta + ", num_doc=" + num_doc + ", nombres=" + nombres
+		return "Estudiante [num_Libreta=" + num_Libreta + ", num_doc=" + num_doc + ", nombres=" + name
 				+ ", apellido=" + apellido + ", edad=" + edad + ", genero=" + genero + ", residencia=" + residencia
 				+ "]";
 	}

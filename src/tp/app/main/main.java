@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 import org.apache.commons.csv.CSVFormat;
@@ -21,6 +22,7 @@ import tp.repositoryImp.EstadoRepositoryImp;
 import tp.repositoryImp.EstudianteRepositoryImp;
 
 public class main {
+	 
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
 		
@@ -28,7 +30,7 @@ public class main {
 		CarreraRepositoryImp cr = new CarreraRepositoryImp();
 		EstadoRepositoryImp estr = new EstadoRepositoryImp();
 		
-		// loadCSV(er,cr,estr);
+		//loadCSV(er,cr,estr);
 		
 		// //"Lista todos los estudiantes Ordenados por Numero De Libreta Decendentemente"
 		// for(Estudiante e :er.getEstudiantes()) {
@@ -38,11 +40,11 @@ public class main {
 		// System.out.println();
 		
 		//Retorna los estudiantes por un ID
-		Estudiante e2 = er.getEstudianteById(11105749);
-		System.out.println(e2);
-		
-		System.out.println();
-		System.out.println();
+//		Estudiante e2 = er.getEstudianteById(11105749);
+//		System.out.println(e2);
+//		
+//		System.out.println();
+//		System.out.println();
 		
 		//"Lista todos los estudiantes filtrados por genero"
 		// for(Estudiante e :er.getEstudiantesByGenero("Male")) {
@@ -53,8 +55,8 @@ public class main {
 		// for(Carrera c :cr.getCarreras()) {
 		// 	System.out.println(c);
 		// }
-
-		for(Estudiante e :er.getEstudiantesByCiudad("Ouyang", 15)){
+//
+		for(Estudiante e :er.getEstudiantesByCiudad("Pavlovskaya", 3)){
 			System.out.println(e);
 		}
 	
@@ -65,6 +67,7 @@ public class main {
 		
 		ArrayList<Estudiante> list_e = new ArrayList<>();
 		ArrayList<Carrera> list_c = new ArrayList<>();
+		ArrayList<Integer> estados= new ArrayList<>();
 			
 		CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new FileReader("data/CARRERA.csv"));
 		for (CSVRecord row: parser) {
@@ -83,30 +86,36 @@ public class main {
 		}
 		
 		parser = CSVFormat.DEFAULT.withHeader().parse(new FileReader("data/ESTADO.csv"));
-		int num = 29;
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/dd/yyyy");
 	       formatter = formatter.withLocale( Locale.US );
 		
 		
+	    int num = 100;
 		for (CSVRecord row: parser) {
-			int n = (int) (Math.random()*30); 
+			while(num>0) {
+			int n = (int) (Math.random()*7); //8 carreras en el csv
+			int n2 = (int) (Math.random()*29); //30 estudiantes
 			LocalDate anioIngreso = LocalDate.parse(row.get("anioIngreso"),formatter);
 			LocalDate anioEgreso =  LocalDate.parse(row.get("anioEgreso"),formatter);
-			Estado e ;
+			Estado e;
 			
-			if(anioIngreso.isBefore(anioEgreso)) {
-				 e = new Estado(list_c.get(n),list_e.get(num), anioIngreso ,anioEgreso);				
-			}else {
-				 e = new Estado(list_c.get(n),list_e.get(num), anioIngreso);	
-			}
-			
+			if(!estados.contains(n+n2)) {
+				estados.add(n+n2);
+				if(anioIngreso.isBefore(anioEgreso)) {
+					e = new Estado(list_c.get(n),list_e.get(n2), anioIngreso ,anioEgreso);				
+				}else {
+					e = new Estado(list_c.get(n),list_e.get(n2), anioIngreso);	
+				}												
+				estr.insertEstado(e);
+			}			
 			num--;
-			estr.insertEstado(e);
+			}
 		}
 		
 	
 		}
+
 	}
 	
 
