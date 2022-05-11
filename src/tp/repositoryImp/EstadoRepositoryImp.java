@@ -13,12 +13,18 @@ public class EstadoRepositoryImp implements EstadoRepository{
 	
 	public EstadoRepositoryImp() {
 	}
-	
+	/**
+	 * Crea un entity manager factory y un entity manager
+	 */
 	private void CreateEntityManager() {
 		this.emf  = Persistence.createEntityManagerFactory("Example");
 		this.em = emf.createEntityManager();
 	}
-
+	/**
+	 * Inserta una inscripcion de un estudiante a una carrera
+	 * 
+	 * @param e {@link tp.clases.tablas.Estado}
+	 */
 	@Override
 	public void InsertEstado(Estado e){
 		CreateEntityManager();

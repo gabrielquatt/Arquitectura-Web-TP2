@@ -15,12 +15,18 @@ public class CarreraRepositoryImp implements CarreraRepository{
 	
 	public CarreraRepositoryImp() {
 	}
-
+	/**
+	 * Crea un entity manager factory y un entity manager
+	 */
 	private void CreateEntityManager() {
 		this.emf  = Persistence.createEntityManagerFactory("Example");
 		this.em = emf.createEntityManager();
 	}
-	
+	/**
+	 * Inserta una carrera
+	 * 
+	 * @param c {@link tp.clases.tablas.Carrera}
+	 */
 	@Override
 	public void InsertarCarrera(Carrera c) {
 		CreateEntityManager();
@@ -30,7 +36,11 @@ public class CarreraRepositoryImp implements CarreraRepository{
 		this.em.close();
 		this.emf.close();	
 	}
-
+	/**
+	 * Devuelve una lista de carreras ordenadas por cantidad de inscriptos
+	 * 
+	 * @return lista de carreras
+	 */
 	@Override
 	public List<Carrera> GetCarrerasOrderByInscriptos() {
 		CreateEntityManager();
@@ -42,7 +52,11 @@ public class CarreraRepositoryImp implements CarreraRepository{
 		this.em.close();
 		return list;
 	}
-
+	/**
+	 * Devuelve una lista de de cantidad de inscriptos y egresados por año por carrera
+	 * 
+	 * @return lista de ReporteCarreraDTO {@link tp.dto.ReporteCarreraDTO}
+	 */
 	@Override
 	public List<ReporteCarreraDTO> ReporteCarrera() {	
 		CreateEntityManager();

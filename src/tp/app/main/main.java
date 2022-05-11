@@ -33,11 +33,11 @@ public class main {
 		// "Lista todos los estudiantes Ordenados por Numero De Libreta Decendentemente"
 
 		/**
-		 * 1) Considere el diseño de un registro de estudiantes, con la siguiente
-		 * información: nombres, apellido, edad, género, número de documento, ciudad de
-		 * residencia, número de libreta universitaria, carrera(s) en la que está
-		 * inscripto, antigüedad en cada una de esas carreras, y si se graduó o no.
-		 * Diseñar el diagrama de objetos y el diagrama DER correspondiente.
+		 * 1) Considere el diseï¿½o de un registro de estudiantes, con la siguiente
+		 * informaciï¿½n: nombres, apellido, edad, gï¿½nero, nï¿½mero de documento, ciudad de
+		 * residencia, nï¿½mero de libreta universitaria, carrera(s) en la que estï¿½
+		 * inscripto, antigï¿½edad en cada una de esas carreras, y si se graduï¿½ o no.
+		 * Diseï¿½ar el diagrama de objetos y el diagrama DER correspondiente.
 		 *
 		 * 2) Implementar consultas para: a) dar de alta un estudiante b) matricular un
 		 * estudiante en una carrera
@@ -45,17 +45,17 @@ public class main {
 
 		LoadCSV(f);
 
-		// c) recuperar todos los estudiantes, y especificar algún criterio de
+		// c) recuperar todos los estudiantes, y especificar algï¿½n criterio de
 		// ordenamiento simple.
 		for (Estudiante e : f.GetEstudianteRepository().GetEstudiantes()) {
 			System.out.println(e);
 		}
 
-		// d) recuperar un estudiante, en base a su número de libreta universitaria.
+		// d) recuperar un estudiante, en base a su nï¿½mero de libreta universitaria.
 		Estudiante e2 = f.GetEstudianteRepository().GetEstudianteById(11105749);
 		System.out.println(e2);
 
-		// e) recuperar todos los estudiantes, en base a su género.
+		// e) recuperar todos los estudiantes, en base a su gï¿½nero.
 		for (Estudiante e : f.GetEstudianteRepository().GetEstudiantesByGenero("Male")) {
 			System.out.println(e);
 		}
@@ -74,15 +74,23 @@ public class main {
 
 		/**
 		 * 3) Generar un reporte de las carreras, que para cada carrera incluya
-		 * información de los inscriptos y egresados por año. Se deben ordenar las
-		 * carreras alfabéticamente, y presentar los años de manera cronológica.
+		 * informaciï¿½n de los inscriptos y egresados por aï¿½o. Se deben ordenar las
+		 * carreras alfabï¿½ticamente, y presentar los aï¿½os de manera cronolï¿½gica.
 		 */
 		for (ReporteCarreraDTO r : f.GetCarreraRepository().ReporteCarrera()) {
 			System.out.println(r);
 		}
 
 	}
-
+	
+	/**
+	 * Crea tablas y carga contenido.
+	 * 
+	 * @param f Factory method de los Repository
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void LoadCSV(FactoryImp f) throws FileNotFoundException, IOException, ParseException {
 
 		ArrayList<Estudiante> list_e = new ArrayList<>();
