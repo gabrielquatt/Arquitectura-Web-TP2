@@ -1,19 +1,18 @@
 package tp.repository;
 
 import java.util.List;
-
 import tp.clases.tablas.Estudiante;
 
 public interface EstudianteRepository {
 
-	void insertarEstudiante(Estudiante e);
+	void InsertarEstudiante(Estudiante e);
 	
-	List<Estudiante> getEstudiantes();
+	List<Estudiante> GetEstudiantes();
 	
-	Estudiante getEstudianteById(int id);
+	Estudiante GetEstudianteById(int id);
 	
-	List<Estudiante> getEstudiantesByGenero(String genero);
+	List<Estudiante> GetEstudiantesByGenero(String genero);
 
-	List<Estudiante> getEstudiantesByCiudad(String ciudad, int idCarrera);
+	List<Estudiante> GetEstudiantesByCiudad(String ciudad, int idCarrera);
 
 }

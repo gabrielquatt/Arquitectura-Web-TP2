@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Wed May 11 16:25:42 ART 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-0180-b495-91a1-00000187d060 
+on database directory E:\TUDAI\Arquitectura web\Workspace\Arquitectura-Web-TP2\exampleDBJPA with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@6d5380c2 
+Loaded from file:/C:/Users/gabri/.m2/repository/org/apache/derby/derby/10.15.2.0/derby-10.15.2.0.jar
+java.vendor=Eclipse Adoptium
+java.runtime.version=17.0.2+8
+user.dir=E:\TUDAI\Arquitectura web\Workspace\Arquitectura-Web-TP2
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

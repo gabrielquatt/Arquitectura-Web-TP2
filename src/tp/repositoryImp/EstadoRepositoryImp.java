@@ -12,21 +12,21 @@ public class EstadoRepositoryImp implements EstadoRepository{
 	private EntityManager em; 
 	
 	public EstadoRepositoryImp() {
+	}
+	
+	private void CreateEntityManager() {
 		this.emf  = Persistence.createEntityManagerFactory("Example");
 		this.em = emf.createEntityManager();
 	}
 
 	@Override
-	public void insertEstado(Estado e){
-		
-		this.emf  = Persistence.createEntityManagerFactory("Example");
-		this.em = emf.createEntityManager();
-		
-		em.getTransaction().begin();
-		em.persist(e);
-		em.getTransaction().commit();
-		em.close();
-		emf.close();
+	public void InsertEstado(Estado e){
+		CreateEntityManager();
+		this.em.getTransaction().begin();
+		this.em.persist(e);
+		this.em.getTransaction().commit();
+		this.em.close();
+		this.emf.close();
 	}
 
 }

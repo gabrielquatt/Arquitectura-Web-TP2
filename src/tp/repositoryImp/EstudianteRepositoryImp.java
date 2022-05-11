@@ -21,67 +21,65 @@ public class EstudianteRepositoryImp implements EstudianteRepository{
 		this.emf  = Persistence.createEntityManagerFactory("Example");
 		this.em = emf.createEntityManager();
 	}
-
-	@Override
-	public void insertarEstudiante(Estudiante e) {
-		
+	
+	private void CreateEntityManager() {
 		this.emf  = Persistence.createEntityManagerFactory("Example");
 		this.em = emf.createEntityManager();
-		
-		em.getTransaction().begin();
-		em.persist(e);
-		em.getTransaction().commit();
-		em.close();
-		emf.close();
 	}
 
 	@Override
-	public List<Estudiante> getEstudiantes() {	
-		this.emf  = Persistence.createEntityManagerFactory("Example");
-		this.em = emf.createEntityManager();	
-		em.getTransaction().begin();		
+	public void InsertarEstudiante(Estudiante e) {
+		CreateEntityManager();
+		this.em.getTransaction().begin();
+		this.em.persist(e);
+		this.em.getTransaction().commit();
+		this.em.close();
+		this.emf.close();
+	}
+
+	@Override
+	public List<Estudiante> GetEstudiantes() {	
+		CreateEntityManager();
+		this.em.getTransaction().begin();		
 		@SuppressWarnings("unchecked")
 		List<Estudiante> list = em.createQuery("SELECT e FROM Estudiante e ORDER BY e.num_Libreta DESC").getResultList();	
-		em.close();
-		emf.close();
+		this.em.close();
+		this.emf.close();
 		return list;
 	}
 
 	@Override
-	public Estudiante getEstudianteById(int id) {
-		this.emf  = Persistence.createEntityManagerFactory("Example");
-		this.em = emf.createEntityManager();	
-		em.getTransaction().begin();			
+	public Estudiante GetEstudianteById(int id) {	
+		CreateEntityManager();
+		this.em.getTransaction().begin();			
 		Estudiante e =	em.find(Estudiante.class, id);;
-		em.close();
-		emf.close();	
+		this.em.close();
+		this.emf.close();	
 		return e;
 	}
 
 	@Override
-	public List<Estudiante> getEstudiantesByGenero(String genero) {
-		this.emf  = Persistence.createEntityManagerFactory("Example");
-		this.em = emf.createEntityManager();	
-		em.getTransaction().begin();		
+	public List<Estudiante> GetEstudiantesByGenero(String genero) {	
+		CreateEntityManager();
+		this.em.getTransaction().begin();		
 		@SuppressWarnings("unchecked")
 		List<Estudiante> list = em.createQuery("SELECT e FROM Estudiante e WHERE e.genero = ?1").setParameter(1, genero).getResultList();	
-		em.close();
-		emf.close();
+		this.em.close();
+		this.emf.close();
 		return list;
 	}
 
 	@Override
-	public List<Estudiante> getEstudiantesByCiudad(String ciudad, int idCarrera) {
-		this.emf  = Persistence.createEntityManagerFactory("Example");
-		this.em = emf.createEntityManager();	
-		em.getTransaction().begin();
+	public List<Estudiante> GetEstudiantesByCiudad(String ciudad, int idCarrera) {	
+		CreateEntityManager();
+		this.em.getTransaction().begin();
 		Query query = em.createQuery("SELECT e FROM Estudiante e WHERE e.residencia LIKE ?1 AND e.num_Libreta IN (SELECT es.estudiante FROM Estado es WHERE (es.carrera.id = ?2))");
 		query.setParameter(1, ciudad);
 		query.setParameter(2, idCarrera);		
 		@SuppressWarnings("unchecked")
 		List<Estudiante> list = query.getResultList();
-		em.close();
-		emf.close();
+		this.em.close();
+		this.emf.close();
 		return list;	
 	}
 
