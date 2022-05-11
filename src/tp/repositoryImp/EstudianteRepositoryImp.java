@@ -7,8 +7,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-
+import tp.clases.tablas.Carrera;
 import tp.clases.tablas.Estudiante;
+import tp.clases.tablas.EstudianteCarreraPK;
 import tp.repository.EstudianteRepository;
 
 public class EstudianteRepositoryImp implements EstudianteRepository{
@@ -74,7 +75,7 @@ public class EstudianteRepositoryImp implements EstudianteRepository{
 		this.emf  = Persistence.createEntityManagerFactory("Example");
 		this.em = emf.createEntityManager();	
 		em.getTransaction().begin();
-		Query query = em.createQuery("SELECT e.name FROM Estudiante e WHERE e.residencia LIKE ?1 AND e.num_Libreta IN (SELECT es.e FROM Estado es WHERE (es.c = ?2))");
+		Query query = em.createQuery("SELECT e FROM Estudiante e WHERE e.residencia LIKE ?1 AND e.num_Libreta IN (SELECT es.estudiante FROM Estado es WHERE (es.carrera.id = ?2))");
 		query.setParameter(1, ciudad);
 		query.setParameter(2, idCarrera);		
 		@SuppressWarnings("unchecked")

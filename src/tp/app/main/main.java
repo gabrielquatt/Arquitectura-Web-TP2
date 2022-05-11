@@ -17,6 +17,7 @@ import antlr.collections.List;
 import tp.clases.tablas.Carrera;
 import tp.clases.tablas.Estado;
 import tp.clases.tablas.Estudiante;
+import tp.dto.ReporteCarreraDTO;
 import tp.repositoryImp.CarreraRepositoryImp;
 import tp.repositoryImp.EstadoRepositoryImp;
 import tp.repositoryImp.EstudianteRepositoryImp;
@@ -56,8 +57,12 @@ public class main {
 		// 	System.out.println(c);
 		// }
 //
-		for(Estudiante e :er.getEstudiantesByCiudad("Pavlovskaya", 3)){
-			System.out.println(e);
+//		for(Estudiante e :er.getEstudiantesByCiudad("Pavlovskaya", 5)){
+//			System.out.println(e);
+//		}
+		
+		for(ReporteCarreraDTO r : cr.ReporteCarrera()) {
+			System.out.println(r);
 		}
 	
 	}
@@ -69,7 +74,7 @@ public class main {
 		ArrayList<Carrera> list_c = new ArrayList<>();
 		ArrayList<Integer> estados= new ArrayList<>();
 			
-		CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new FileReader("data/CARRERA.csv"));
+		CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new FileReader("data/CARRERA1.csv"));
 		for (CSVRecord row: parser) {
 			Carrera c = new Carrera(row.get("carrera"));
 			list_c.add(c);
@@ -85,16 +90,17 @@ public class main {
 			er.insertarEstudiante(e);
 		}
 		
+		
+		
+		
 		parser = CSVFormat.DEFAULT.withHeader().parse(new FileReader("data/ESTADO.csv"));
-		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/dd/yyyy");
-	       formatter = formatter.withLocale( Locale.US );
+		formatter = formatter.withLocale( Locale.US );
 		
-		
-	    int num = 100;
 		for (CSVRecord row: parser) {
+			int num = 30;
 			while(num>0) {
-			int n = (int) (Math.random()*7); //8 carreras en el csv
+			int n = (int) (Math.random()*18); //8 carreras en el csv
 			int n2 = (int) (Math.random()*29); //30 estudiantes
 			LocalDate anioIngreso = LocalDate.parse(row.get("anioIngreso"),formatter);
 			LocalDate anioEgreso =  LocalDate.parse(row.get("anioEgreso"),formatter);
@@ -102,13 +108,16 @@ public class main {
 			
 			if(!estados.contains(n+n2)) {
 				estados.add(n+n2);
+				
 				if(anioIngreso.isBefore(anioEgreso)) {
 					e = new Estado(list_c.get(n),list_e.get(n2), anioIngreso ,anioEgreso);				
 				}else {
 					e = new Estado(list_c.get(n),list_e.get(n2), anioIngreso);	
 				}												
 				estr.insertEstado(e);
-			}			
+			}	
+			
+			
 			num--;
 			}
 		}

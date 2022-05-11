@@ -10,6 +10,7 @@
 		<class>tp.clases.tablas.Ciudad</class>
 		<class>tp.clases.tablas.Estado</class>		
 		<class>tp.clases.tablas.Estudiante</class>
+		<class>tp.dto.ReporteCarreraDTO</class>
 		
 		<properties>
 			<!-- Propiedades de configuracion de JDBC para Derby /-->
